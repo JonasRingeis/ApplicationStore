@@ -1,7 +1,8 @@
 using System.Windows.Controls;
+using System.Windows.Input;
 using Installer.ViewModel;
 
-namespace Installer.View;
+namespace Installer.View.Pages;
 
 public partial class SelectApplication : UserControl
 {
@@ -9,5 +10,11 @@ public partial class SelectApplication : UserControl
     {
         InitializeComponent();
         DataContext = new SelectApplicationViewModel();
+    }
+
+    private void HandleApplicationClick(object sender, MouseButtonEventArgs e)
+    {
+        var installImmediate = e.ClickCount >= 2; 
+        ((SelectApplicationViewModel)DataContext).ApplicationClick(sender, installImmediate);
     }
 }
