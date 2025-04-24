@@ -5,14 +5,15 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Installer.Gateway;
 
-public class ApplicationGateway
+public class ApplicationGateway : IApplicationModel
 {
     private readonly SqlConnectionFactory _sqlConnectionFactory;
         
     public ApplicationGateway()
     {
         _sqlConnectionFactory = new SqlConnectionFactory("app_store");
-        GatewayHelper.SetMapType<Application>();
+        GatewayHelper.UseStripUnderscoreMapping<Application>();
+        // GatewayHelper.UseColumnAttributeNameMapping<Application>();
     }
 
     public async Task<Application[]> GetAllApplications()
