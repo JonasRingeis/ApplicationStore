@@ -13,7 +13,8 @@
         ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
         Background="{DynamicResource ApplicationBackgroundBrush}"
         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-        WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+        WindowStartupLocation="CenterScreen"
+        >
     
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -22,14 +23,14 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <TextBlock Text="Install Premium Software" FontSize="20" FontWeight="Bold" />
+            <ui:TextBlock Text="Install Premium Software" FontTypography="Title" />
         </Grid>
         <Grid Grid.Row="1">
             <ScrollViewer x:Name="MainScrollViewer"
                           HorizontalScrollBarVisibility="Hidden"
                           VerticalScrollBarVisibility="Hidden"
                           >
-                <Frame Source="./View/Installation.xaml" />
+                <Frame Source="../Pages/SelectApplication.xaml" />
             </ScrollViewer>
         </Grid>
     </Grid>
