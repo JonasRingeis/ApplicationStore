@@ -21,9 +21,11 @@ public partial class InstallationViewModel : ObservableObject
         InstallationVisibility = "Collapsed";
         DownloadProgress = 0;
 
-        await Task.Delay(2000);
-        DownloadProgress = 40;
-        await Task.Delay(3000);
+        for (int i = 0; i < 100; i++)
+        {
+            DownloadProgress = i;
+            await Task.Delay((int)Math.Round(50 - 0.005f * Math.Pow(i, 2)));
+        }
 
         DownloadProgress = 100;
         DownloadVisibility = "Collapsed";
