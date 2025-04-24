@@ -4,16 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Installer"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
-        Title="Premium Installer" Height="450" Width="800" ResizeMode="NoResize"
+        Title="Premium Installer"
+        Height="450" Width="800"
+        ResizeMode="NoResize"
+        ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+        ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+        Background="{DynamicResource ApplicationBackgroundBrush}"
+        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
         WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBlock.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
     
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -25,11 +25,11 @@
             <TextBlock Text="Install Premium Software" FontSize="20" FontWeight="Bold" />
         </Grid>
         <Grid Grid.Row="1">
-            <ScrollViewer x:Name="MainScrollViewer">
-                <!--materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True"-->
-                <!-- HorizontalScrollBarVisibility="{Binding SelectedItem.HorizontalScrollBarVisibilityRequirement, FallbackValue=Disabled}" -->
-                <!-- VerticalScrollBarVisibility="{Binding SelectedItem.VerticalScrollBarVisibilityRequirement, FallbackValue=Disabled}"> -->
-                <Frame Source="./View/SelectApplication.xaml" />
+            <ScrollViewer x:Name="MainScrollViewer"
+                          HorizontalScrollBarVisibility="Hidden"
+                          VerticalScrollBarVisibility="Hidden"
+                          >
+                <Frame Source="./View/Installation.xaml" />
             </ScrollViewer>
         </Grid>
     </Grid>

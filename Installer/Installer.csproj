@@ -12,9 +12,8 @@
     <ItemGroup>
       <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
       <PackageReference Include="Dapper" Version="2.1.66" />
-      <PackageReference Include="MaterialDesignColors" Version="5.2.2-ci975" />
-      <PackageReference Include="MaterialDesignThemes" Version="5.2.2-ci975" />
       <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+      <PackageReference Include="WPF-UI" Version="4.0.2" />
     </ItemGroup>
 
 </Project>
