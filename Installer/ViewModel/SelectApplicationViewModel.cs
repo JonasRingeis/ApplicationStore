@@ -42,5 +42,10 @@ public partial class SelectApplicationViewModel : ObservableObject
         InstallButtonEnabled = true;
         Console.WriteLine("Install Immediate: " + installImmediate);
         Console.WriteLine(SelectedApplication);
+        
+        if (installImmediate)
+        {
+            MainWindowViewModel.Instance.Navigate("Installation");
+        }
     }
 }

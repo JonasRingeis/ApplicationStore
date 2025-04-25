@@ -9,7 +9,6 @@
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
              ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -17,7 +16,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackPanel Margin="0, 8">
+        <StackPanel>
             <ui:ListView ItemsSource="{Binding Applications, Mode=OneWay}">
                 <ui:ListView.ItemTemplate>
                     <DataTemplate>

@@ -8,8 +8,11 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Dark" />
+                <!-- <Color x:Key="SystemAccentColor">#f00020</Color> -->
                 <ui:ControlsDictionary />
+                <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="Red" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

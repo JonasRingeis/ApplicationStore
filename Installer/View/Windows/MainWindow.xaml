@@ -1,37 +1,50 @@
-﻿<Window x:Class="Installer.MainWindow"
+﻿<ui:FluentWindow x:Class="Installer.View.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Installer"
+        xmlns:viewModel="clr-namespace:Installer.ViewModel"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
         Title="Premium Installer"
         Height="450" Width="800"
         ResizeMode="NoResize"
+        d:DataContext="{d:DesignInstance viewModel:MainWindowViewModel}"
         ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
         ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-        Background="{DynamicResource ApplicationBackgroundBrush}"
-        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-        WindowStartupLocation="CenterScreen"
-        >
-    
-    <Grid Margin="10">
+        ExtendsContentIntoTitleBar="True"
+        WindowStartupLocation="CenterScreen">
+        
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="12*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-            <ui:TextBlock Text="Install Premium Software" FontTypography="Title" />
-        </Grid>
-        <Grid Grid.Row="1">
-            <ScrollViewer x:Name="MainScrollViewer"
-                          HorizontalScrollBarVisibility="Hidden"
-                          VerticalScrollBarVisibility="Hidden"
-                          >
-                <Frame Source="../Pages/SelectApplication.xaml" />
-            </ScrollViewer>
-        </Grid>
+        <DockPanel Grid.Row="0">
+            <ui:Button 
+                Margin="4, 4, 0, 0"
+                IsEnabled="{Binding BackButtonEnabled}"
+                Command="{Binding BackCommand}"
+                Style="{StaticResource BasePaneButtonStyle}"
+                Icon="{ui:SymbolIcon ArrowLeft48}" />
+            <ui:TitleBar
+                x:Name="TitleBar"
+                Title="Application Title"
+                VerticalAlignment="Top"
+                CloseWindowByDoubleClickOnIcon="True">
+                <!-- <ui:TitleBar.Icon> -->
+                <!--     <ui:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" /> -->
+                <!-- </ui:TitleBar.Icon> -->
+            </ui:TitleBar>
+        </DockPanel>
+        
+        <ScrollViewer Grid.Row="1" Margin="16, 8"
+                      HorizontalScrollBarVisibility="Hidden"
+                      VerticalScrollBarVisibility="Hidden"
+        >
+            <Frame Source="{Binding Page}" />
+        </ScrollViewer>
     </Grid>
-</Window>
+</ui:FluentWindow>
