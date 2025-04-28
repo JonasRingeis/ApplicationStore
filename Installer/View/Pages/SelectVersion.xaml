@@ -1,0 +1,44 @@
+<UserControl x:Class="Installer.View.Pages.SelectVersion"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Installer.View.Pages"
+             xmlns:viewModel="clr-namespace:Installer.ViewModel"
+             d:DataContext="{d:DesignInstance viewModel:SelectVersionViewModel}"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+             ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="0">
+            <ui:TextBlock 
+                FontTypography="Title"
+                Text="{Binding SelectedApplication.Title, Mode=OneWay}" />
+            <ui:TextBlock
+                FontTypography="Body"
+                Text="{Binding SelectedApplication.Description, Mode=OneWay}" />
+        </StackPanel>
+        <ui:Card Grid.Row="0" Grid.Column="1" VerticalAlignment="Top">
+            <StackPanel>
+                <ui:TextBlock FontTypography="Subtitle" Text="Versions"/>
+                <ComboBox
+                    ItemsSource="{Binding ApplicationVersions}"
+                    SelectedItem="{Binding SelectedVersion}"
+                    DisplayMemberPath="VersionName"/>
+                <ui:Button
+                    Margin="0, 8, 0, 0"
+                    Command="{Binding InstallCommand}"
+                    HorizontalAlignment="Right" Appearance="Primary"
+                    Content="Install" />
+            </StackPanel>
+        </ui:Card>
+    </Grid>
+</UserControl>
