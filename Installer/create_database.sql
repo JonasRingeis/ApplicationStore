@@ -89,5 +89,51 @@ VALUES
     2
 );
 
+INSERT INTO 
+    dbo.application_versions
+(
+    application_id,
+    checksum,
+    checksum_algorithm_id,
+    download_url,
+    version_name
+)
+values
+(
+    1,
+    'j39asklj30er9sdjo',
+    3,
+    'https://firefox.com/download',
+    '128.16.0'
+),
+(
+    1,
+    'fe23jon2g56f3f4sd',
+    3,
+    'https://firefox.com/download',
+    '128.16.1'
+),
+(
+    1,
+    'd3ouin43fio903f',
+    3,
+    'https://firefox.com/download',
+    '128.17.0'
+),
+(
+    2,
+    'feruih29uidsa',
+    2,
+    'https://chrome.com/download',
+    '169.27.14'
+),
+(
+    2,
+    '3e2fnm9iouin9sd',
+    2,
+    'https://chrome.com/download',
+    '169.27.15'
+);
+
 END
 --#endregion
