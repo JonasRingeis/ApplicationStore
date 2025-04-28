@@ -1,4 +1,5 @@
-﻿using Installer.ViewModel;
+﻿using System.Windows.Media;
+using Installer.ViewModel;
 using Wpf.Ui.Appearance;
 
 namespace Installer.View.Windows;
@@ -13,5 +14,15 @@ public partial class MainWindow
         InitializeComponent();
         DataContext = new MainWindowViewModel();
         ApplicationThemeManager.Apply(this);
+        
+        var redColor = new Color
+        {
+            R = 240,
+            G = 0,
+            B = 32,
+            A = 255
+        };
+
+        App.Current.Resources["SystemAccentColorPrimary"] = redColor;
     }
 }
