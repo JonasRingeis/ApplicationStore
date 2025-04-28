@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Installer.Model;
 
 namespace Installer.ViewModel;
 
@@ -17,6 +18,7 @@ public partial class MainWindowViewModel : ObservableObject
         Navigate("SelectApplication");
     }
 
+    #region Navigation
     public void Navigate(string page)
     {
         _navigationStack.Push(page);
@@ -37,4 +39,12 @@ public partial class MainWindowViewModel : ObservableObject
     {
         BackButtonEnabled = _navigationStack.Count > 1;
     }
+    #endregion
+
+    #region Page specific state
+
+    public Application SelectedApplication;
+    public ApplicationVersion ApplicationVersion;
+
+    #endregion
 }

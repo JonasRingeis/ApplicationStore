@@ -12,14 +12,14 @@ public partial class SelectApplicationViewModel : ObservableObject
     [ObservableProperty]
     private ObservableCollection<Application> _applications = [];
 
-    [ObservableProperty] private bool _installButtonEnabled;
-    [ObservableProperty] private int _selectedApplication;
+    [ObservableProperty] private bool _selectButtonEnabled;
+    [ObservableProperty] private Application _selectedApplication;
     
     private readonly IApplicationModel _applicationModel;
     
     public SelectApplicationViewModel()
     {
-        InstallButtonEnabled = false;
+        SelectButtonEnabled = false;
         _applicationModel = new ApplicationGateway();
         _ = GetAllApplications();
     }
@@ -31,21 +31,20 @@ public partial class SelectApplicationViewModel : ObservableObject
     
     public void ApplicationClick(object sender, bool isDoubleClick)
     {
-        InstallButtonEnabled = true;
+        SelectButtonEnabled = true;
 
-        var selectedItem = (sender as ListView)!.SelectedItem as Application;
-        SelectedApplication = selectedItem!.ApplicationId;
+        SelectedApplication = ((sender as ListView)!.SelectedItem as Application)!;
         
         if (!isDoubleClick) return;
         
-        MainWindowViewModel.Instance.ApplicationId = SelectedApplication;
+        MainWindowViewModel.Instance.SelectedApplication = SelectedApplication;
         MainWindowViewModel.Instance.Navigate("SelectVersion");
     }
 
     [RelayCommand]
-    private void Install()
+    private void SelectApp()
     {
-        MainWindowViewModel.Instance.ApplicationId = SelectedApplication;
+        MainWindowViewModel.Instance.SelectedApplication = SelectedApplication;
         MainWindowViewModel.Instance.Navigate("SelectVersion");
     }
 }
