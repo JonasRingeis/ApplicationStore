@@ -7,7 +7,7 @@ public static class GatewayHelper
 {
     public static string GetConnectionString(string databaseName)
     {
-        var templateUri = Environment.GetEnvironmentVariable("DB_URI")!;
+        var templateUri = Environment.GetEnvironmentVariable("DB_URI") ?? throw new Exception("DB_URI is not set in environment variables.");
         return templateUri.Replace("<DATABASE_NAME>", databaseName);
     }
     
