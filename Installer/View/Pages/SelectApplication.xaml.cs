@@ -1,3 +1,4 @@
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Installer.ViewModel;
@@ -11,10 +12,15 @@ public partial class SelectApplication : UserControl
         InitializeComponent();
         DataContext = new SelectApplicationViewModel();
     }
+    
+    private SelectApplicationViewModel _viewModel => (SelectApplicationViewModel)DataContext;
 
-    private void HandleApplicationClick(object sender, MouseButtonEventArgs e)
+    private void HandleApplicationClick(object sender, MouseButtonEventArgs _)
     {
-        var installImmediate = e.ClickCount >= 2; 
-        ((SelectApplicationViewModel)DataContext).ApplicationClick(sender, installImmediate);
+        _viewModel.ApplicationClick(sender, false);
+    }
+    private void HandleApplicationDoubleClick(object sender, MouseButtonEventArgs _)
+    {
+        _viewModel.ApplicationClick(sender, true);
     }
 }
