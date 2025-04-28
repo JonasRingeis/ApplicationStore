@@ -14,7 +14,8 @@
         ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
         ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
         ExtendsContentIntoTitleBar="True"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Icon="../../Assets/premium_installer_icon.ico">
         
     <Grid>
         <Grid.RowDefinitions>
@@ -30,13 +31,12 @@
                 Style="{StaticResource BasePaneButtonStyle}"
                 Icon="{ui:SymbolIcon ArrowLeft48}" />
             <ui:TitleBar
-                x:Name="TitleBar"
-                Title="Application Title"
+                Title="Premium Installer"
                 VerticalAlignment="Top"
                 CloseWindowByDoubleClickOnIcon="True">
-                <!-- <ui:TitleBar.Icon> -->
-                <!--     <ui:ImageIcon Source="pack://application:,,,/Assets/wpfui.png" /> -->
-                <!-- </ui:TitleBar.Icon> -->
+                <ui:TitleBar.Icon>
+                    <ui:ImageIcon Source="pack://application:,,,/Assets/premium_installer_icon.png" />
+                </ui:TitleBar.Icon>
             </ui:TitleBar>
         </DockPanel>
         
