@@ -15,7 +15,17 @@ public partial class MainWindow
         DataContext = new MainWindowViewModel();
         ApplicationThemeManager.Apply(this);
         
+        OverwriteTheme();
+    }
+
+    private static void OverwriteTheme()
+    {
         var accentColor = ColorConverter.ConvertFromString("#ff6c00");
+        var accentHighlighted = ColorConverter.ConvertFromString("#ff7714");
+        var accentClicked = ColorConverter.ConvertFromString("#ff8832");
+        
         App.Current.Resources["SystemAccentColorPrimary"] = accentColor;
+        App.Current.Resources["SystemAccentColorSecondary"] = accentHighlighted;
+        App.Current.Resources["SystemAccentColorTertiary"] = accentClicked;
     }
 }
