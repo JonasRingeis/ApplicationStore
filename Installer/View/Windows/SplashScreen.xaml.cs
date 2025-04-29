@@ -30,5 +30,6 @@ public partial class SplashScreen : Window
 
         Close();
         mainWindow.Show();
+        App.Current.MainWindow = mainWindow;
     }
 }
