@@ -1,4 +1,4 @@
-<ui:FluentWindow x:Class="Installer.View.Windows.SplashScreen"
+<Window x:Class="Installer.View.Windows.SplashScreen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,11 +8,12 @@
         mc:Ignorable="d"
         Title="Premium Installer"
         Height="250" Width="550"
-        AllowsTransparency="False"
         WindowStyle="None"
         ResizeMode="NoResize"
         ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
         ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+        Background="{DynamicResource ApplicationBackgroundBrush}"
+        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
         WindowStartupLocation="CenterScreen"
         Icon="../../Assets/premium_installer_icon.ico">
     <Grid>
@@ -26,4 +27,4 @@
             </StackPanel>
         </StackPanel>        
     </Grid>
-</ui:FluentWindow>
+</Window>

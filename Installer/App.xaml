@@ -3,16 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Installer"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-             StartupUri="View/Windows/MainWindow.xaml">
+             StartupUri="View/Windows/SplashScreen.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Dark" />
-                <!-- <Color x:Key="SystemAccentColor">#f00020</Color> -->
                 <ui:ControlsDictionary />
                 <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/NavigationView/NavigationViewBasePaneButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="Red" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
