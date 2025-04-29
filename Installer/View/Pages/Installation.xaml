@@ -21,11 +21,22 @@
         <StackPanel Grid.Row="0">
             <StackPanel Visibility="{Binding DownloadVisibility, Mode=OneWay}">
                 <ProgressBar Value="{Binding DownloadProgress, Mode=OneWay}"  Margin="0,8" />
-                <TextBlock Text="Downloading Packages..." FontSize="14" />
+                <TextBlock FontSize="14">
+                    Downloading Packages from
+                    <TextBlock Text="{Binding InstallationData.DownloadUrl}" />
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Visibility="{Binding ChecksumVisibility, Mode=OneWay}">
+                <ProgressBar Value="{Binding ChecksumProgress, Mode=OneWay}"  Margin="0,8" />
+                <TextBlock FontSize="14">
+                    Verifying
+                    <TextBlock Text="{Binding InstallationData.ChecksumAlgorithm}" />
+                    Checksum
+                </TextBlock>
             </StackPanel>
             <StackPanel Visibility="{Binding InstallationVisibility, Mode=OneWay}">
                 <ProgressBar IsIndeterminate="True" Margin="0,8" />
-                <TextBlock Text="Installing Packages..." FontSize="14" />
+                <TextBlock Text="Installing Packages" FontSize="14" />
             </StackPanel>
         </StackPanel>
         
@@ -35,11 +46,6 @@
                 Content="Cancel"
                 Click="Button_Click"
                 ToolTip="Cancel installation" />
-            <ui:Button
-                Content="Install"
-                Appearance="Primary"
-                Click="Button_Click"
-                ToolTip="Continue Installation" />
         </StackPanel>
     </Grid>
 </UserControl>
