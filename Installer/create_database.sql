@@ -93,7 +93,7 @@ INSERT INTO
     dbo.application_versions
 (
     application_id,
-    checksum,
+    checksum_hash,
     checksum_algorithm_id,
     download_url,
     version_name
@@ -115,9 +115,9 @@ values
 ),
 (
     1,
-    'd3ouin43fio903f',
+    '1bf4241bcc1c41a516f6313243153851ddcc49c22cd23fb8d5371a4b06b839235924f77b206a41880f71f47be0636e9ff2c7873f99daba106c7ee311513bb2dc',
     3,
-    'https://firefox.com/download',
+    'https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=en-US',
     '128.17.0'
 ),
 (
