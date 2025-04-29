@@ -48,7 +48,7 @@ CREATE TABLE
         CONSTRAINT default_application_versions_uploaded_at DEFAULT SYSUTCDATETIME()
     ,version_name               varchar(255)                not null
     ,download_url               varchar(500)                not null
-    ,checksum                   varchar(255)                null
+    ,checksum_hash              varchar(255)                null
     ,checksum_algorithm_id      INT                         null
     ,CONSTRAINT pk_application_versions PRIMARY KEY (application_version_id asc)
 );
