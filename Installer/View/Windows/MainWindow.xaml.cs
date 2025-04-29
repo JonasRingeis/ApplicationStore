@@ -15,14 +15,7 @@ public partial class MainWindow
         DataContext = new MainWindowViewModel();
         ApplicationThemeManager.Apply(this);
         
-        var redColor = new Color
-        {
-            R = 240,
-            G = 0,
-            B = 32,
-            A = 255
-        };
-
-        App.Current.Resources["SystemAccentColorPrimary"] = redColor;
+        var accentColor = ColorConverter.ConvertFromString("#ff6c00");
+        App.Current.Resources["SystemAccentColorPrimary"] = accentColor;
     }
 }
