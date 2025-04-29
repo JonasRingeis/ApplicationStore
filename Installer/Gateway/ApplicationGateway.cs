@@ -16,6 +16,7 @@ public class ApplicationGateway : IApplicationModel
 
         GatewayHelper.UseColumnAttributeNameMapping<Application>();
         GatewayHelper.UseColumnAttributeNameMapping<ApplicationVersion>();
+        GatewayHelper.UseColumnAttributeNameMapping<InstallationData>();
     }
 
     public async Task<Application[]> GetAllApplications()
@@ -23,7 +24,7 @@ public class ApplicationGateway : IApplicationModel
         await using var connection = await _sqlConnectionFactory.CreateConnectionAsync();
         
         return (await connection.QueryAsync<Application>("""
-                                                              SELECT a.*, P.publisher_name FROM dbo.applications AS A
+                                                              SELECT A.*, P.publisher_name FROM dbo.applications AS A
                                                               JOIN dbo.publishers AS P ON P.publisher_id = A.publisher_id;
                                                          """)).ToArray();
     }
@@ -37,5 +38,18 @@ public class ApplicationGateway : IApplicationModel
                                                                 WHERE application_id = @appId
                                                                 ORDER BY uploaded_at DESC;
                                                                 """, new { appId })).ToArray();
+    }
+
+    public async Task<InstallationData> GetInstallationData(int versionId)
+    {
+        await using var connection = await _sqlConnectionFactory.CreateConnectionAsync();
+
+        return await connection.QueryFirstAsync<InstallationData>("""
+                                                                  SELECT A.download_url, A.checksum_hash,
+                                                                         C.algorithm_name AS checksum_algorithm
+                                                                  FROM dbo.application_versions as A
+                                                                  JOIN dbo.checksum_algorithms AS C ON C.algorithm_id = A.checksum_algorithm_id
+                                                                  WHERE A.application_version_id = @versionId;
+                                                                  """, new { versionId });
     }
 }
