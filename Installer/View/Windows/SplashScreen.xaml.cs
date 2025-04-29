@@ -1,4 +1,5 @@
 using System.Windows;
+using System.Windows.Media;
 using Wpf.Ui.Appearance;
 
 namespace Installer.View.Windows;
@@ -10,6 +11,9 @@ public partial class SplashScreen : Window
         InitializeComponent();
         ApplicationThemeManager.Apply(this);
 
+        var accentColor = ColorConverter.ConvertFromString("#ff6c00");
+        App.Current.Resources["SystemAccentColorPrimary"] = accentColor;
+        
         _ = LoadMainWindow();
     }
 
