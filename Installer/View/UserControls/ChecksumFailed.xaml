@@ -33,8 +33,8 @@
             <Image Source="../../Assets/sad.png" Width="200" HorizontalAlignment="Left"/>
         </StackPanel>
         <DockPanel Grid.Row="1" HorizontalAlignment="Right">
-            <ui:Button Appearance="Primary" Content="Retry" Margin="0, 0, 4, 0"/>
-            <ui:Button Click="OtherVersion_Click" Content="Select Other Version"/>
+            <ui:Button Click="Close_Click" Content="Close" Margin="0, 0, 4, 0"/>
+            <ui:Button Click="OtherVersion_Click" Appearance="Primary" Content="Select Other Version"/>
         </DockPanel>
     </Grid>
 </UserControl>

@@ -11,6 +11,10 @@ public partial class ChecksumFailed : UserControl
         InitializeComponent();
     }
 
+    private void Close_Click(object sender, RoutedEventArgs e)
+    {
+        App.Current.MainWindow.Close();
+    }
     private void OtherVersion_Click(object sender, RoutedEventArgs e)
     {
         MainWindowViewModel.Instance.BackCommand.Execute(sender);
