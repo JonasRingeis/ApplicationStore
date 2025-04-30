@@ -27,7 +27,7 @@
                 </TextBlock>
             </StackPanel>
             <StackPanel Visibility="{Binding ChecksumVisibility, Mode=OneWay}">
-                <ProgressBar Value="{Binding ChecksumProgress, Mode=OneWay}"  Margin="0,8" />
+                <ProgressBar IsIndeterminate="True"  Margin="0,8" />
                 <TextBlock FontSize="14">
                     Verifying
                     <TextBlock Text="{Binding InstallationData.ChecksumAlgorithm}" />
@@ -38,11 +38,12 @@
                 <ProgressBar IsIndeterminate="True" Margin="0,8" />
                 <TextBlock Text="Installing Packages" FontSize="14" />
             </StackPanel>
+            <Frame Source="{Binding Result}"/>
         </StackPanel>
         
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <ui:Button
-                Margin="0,0,4,0"
+                Visibility="{Binding CancelButtonVisibility}"
                 Content="Cancel"
                 Click="Button_Click"
                 ToolTip="Cancel installation" />

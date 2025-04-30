@@ -16,17 +16,28 @@ public partial class InstallationViewModel : ObservableObject
     private Visibility? _downloadVisibility, _checksumVisibility, _installationVisibility = Visibility.Collapsed;
     
     [ObservableProperty]
-    private float? _downloadProgress, _checksumProgress;
-
+    private Visibility _cancelButtonVisibility = Visibility.Visible;
+    
+    [ObservableProperty]
+    private float? _downloadProgress;
+    
     [ObservableProperty] private InstallationData? _installationData;
+    
+    [ObservableProperty] private string? _result;
+    
+    private readonly string _appDir;
     
     private readonly IApplicationModel _applicationModel;
     private readonly Downloader _downloader;
+    private readonly ChecksumVerifier _checksumVerifier;
 
     public InstallationViewModel()
     {
         _applicationModel = new ApplicationGateway();
         _downloader = new Downloader();
+        _checksumVerifier = new ChecksumVerifier();
+        _appDir = GetApplicationDir();
+
         _ = PerformInstallation();
     }
 
@@ -35,50 +46,51 @@ public partial class InstallationViewModel : ObservableObject
         var versionId = MainWindowViewModel.Instance.ApplicationVersion.ApplicationVersionId;
         InstallationData = await _applicationModel.GetInstallationData(versionId);
 
-        await Download();
-
-        await VerifyChecksum();
-
+        var fileName = $"{MainWindowViewModel.Instance.SelectedApplication.ApplicationId}-{MainWindowViewModel.Instance.ApplicationVersion.VersionName}.raw";
+        var installationDir = Path.Combine(_appDir, fileName); 
+        
+        await Download(installationDir);
+        await VerifyChecksum(installationDir);
         await MockInstallation();
     }
 
-    private async Task Download()
+    private async Task Download(string installationDir)
     {
         DownloadVisibility = Visibility.Visible;
         ChecksumVisibility = Visibility.Collapsed;
         InstallationVisibility = Visibility.Collapsed;
         
-        var progress = new Progress<float>(p =>
-        {
-            DownloadProgress = p * 100f;
-        });
-        var dir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        dir = Path.Combine(dir, "Premium-Installer");
-        Directory.CreateDirectory(dir);
-
-        var fileName = $"{MainWindowViewModel.Instance.SelectedApplication.ApplicationId}-{MainWindowViewModel.Instance.ApplicationVersion.VersionName}.raw";
-        var path = Path.Combine(dir, fileName);
+        var progress = new Progress<float>(p => DownloadProgress = p * 100f);
         
-        Console.WriteLine($"Saving to file: {path}");
-        await _downloader.DownloadPackages(InstallationData!.DownloadUrl, path, progress);
+        Console.WriteLine($"Saving to file: {installationDir}");
+        await _downloader.DownloadPackages(InstallationData!.DownloadUrl, installationDir, progress);
     }
 
-    private async Task VerifyChecksum()
+    private async Task VerifyChecksum(string installationDir)
     {
         DownloadVisibility = Visibility.Collapsed;
         ChecksumVisibility = Visibility.Visible;
-        for (var i = 0; i < 100; i++)
-        {
-            ChecksumProgress = i;
-            await Task.Delay((int)Math.Round(30 - 0.0025f * Math.Pow(i, 2)));
-        }
-        ChecksumProgress = 100;
+        
+        var algorithm = InstallationData!.ChecksumAlgorithm;
+        var checksum = InstallationData!.ChecksumHash;
+        var result = await _checksumVerifier.VerifyAsync(installationDir, algorithm, checksum);
+        
+        Console.WriteLine("Hash verified: " + result);
     }
     
     private async Task MockInstallation()
     {
         ChecksumVisibility = Visibility.Collapsed;
-        DownloadVisibility = Visibility.Collapsed;
         InstallationVisibility = Visibility.Visible;
+
+        await Task.Delay(3000);
+    }
+    
+    private static string GetApplicationDir()
+    {
+        var dir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        dir = Path.Combine(dir, "Premium-Installer");
+        Directory.CreateDirectory(dir);
+        return dir;
     }
 }
