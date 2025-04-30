@@ -50,8 +50,14 @@ public partial class InstallationViewModel : ObservableObject
         var installationDir = Path.Combine(_appDir, fileName); 
         
         await Download(installationDir);
-        await VerifyChecksum(installationDir);
+        var verified = await VerifyChecksum(installationDir);
+        if (!verified)
+        {
+            ShowChecksumFailed();
+            return;
+        }
         await MockInstallation();
+        ShowSuccess();
     }
 
     private async Task Download(string installationDir)
@@ -66,16 +72,14 @@ public partial class InstallationViewModel : ObservableObject
         await _downloader.DownloadPackages(InstallationData!.DownloadUrl, installationDir, progress);
     }
 
-    private async Task VerifyChecksum(string installationDir)
+    private async Task<bool> VerifyChecksum(string installationDir)
     {
         DownloadVisibility = Visibility.Collapsed;
         ChecksumVisibility = Visibility.Visible;
         
         var algorithm = InstallationData!.ChecksumAlgorithm;
         var checksum = InstallationData!.ChecksumHash;
-        var result = await _checksumVerifier.VerifyAsync(installationDir, algorithm, checksum);
-        
-        Console.WriteLine("Hash verified: " + result);
+        return await _checksumVerifier.VerifyAsync(installationDir, algorithm, checksum);
     }
     
     private async Task MockInstallation()
@@ -83,7 +87,24 @@ public partial class InstallationViewModel : ObservableObject
         ChecksumVisibility = Visibility.Collapsed;
         InstallationVisibility = Visibility.Visible;
 
-        await Task.Delay(3000);
+        await Task.Delay(1000);
+    }
+
+    private void ShowChecksumFailed()
+    {
+        HideInstallationUi();
+        Result = "../UserControls/ChecksumFailed.xaml";        
+    }
+    private void ShowSuccess()
+    {
+        HideInstallationUi();
+        Result = "../UserControls/InstallationSuccess.xaml";
+    }
+    private void HideInstallationUi()
+    {
+        ChecksumVisibility = Visibility.Collapsed;
+        InstallationVisibility = Visibility.Collapsed;
+        CancelButtonVisibility = Visibility.Collapsed;
     }
     
     private static string GetApplicationDir()
