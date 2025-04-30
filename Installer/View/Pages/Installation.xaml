@@ -23,7 +23,7 @@
                 <ProgressBar Value="{Binding DownloadProgress, Mode=OneWay}"  Margin="0,8" />
                 <TextBlock FontSize="14">
                     Downloading Packages from
-                    <TextBlock Text="{Binding InstallationData.DownloadUrl}" />
+                    <TextBlock Text="{Binding DownloadDomain}" />
                 </TextBlock>
             </StackPanel>
             <StackPanel Visibility="{Binding ChecksumVisibility, Mode=OneWay}">

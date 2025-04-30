@@ -1,6 +1,7 @@
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Installer.Gateway;
@@ -16,10 +17,10 @@ public partial class InstallationViewModel : ObservableObject
     private Visibility? _downloadVisibility, _checksumVisibility, _installationVisibility = Visibility.Collapsed;
     
     [ObservableProperty]
-    private Visibility _cancelButtonVisibility = Visibility.Visible;
-    
-    [ObservableProperty]
-    private float? _downloadProgress;
+    private Visibility? _cancelButtonVisibility = Visibility.Visible;
+
+    [ObservableProperty] private string? _downloadDomain;
+    [ObservableProperty] private float? _downloadProgress;
     
     [ObservableProperty] private InstallationData? _installationData;
     
@@ -45,6 +46,7 @@ public partial class InstallationViewModel : ObservableObject
     {
         var versionId = MainWindowViewModel.Instance.ApplicationVersion.ApplicationVersionId;
         InstallationData = await _applicationModel.GetInstallationData(versionId);
+        DownloadDomain = DomainExtractionRegex().Match(InstallationData.DownloadUrl).Groups["domain"].Value;
 
         var fileName = $"{MainWindowViewModel.Instance.SelectedApplication.ApplicationId}-{MainWindowViewModel.Instance.ApplicationVersion.VersionName}.raw";
         var installationDir = Path.Combine(_appDir, fileName); 
@@ -114,4 +116,7 @@ public partial class InstallationViewModel : ObservableObject
         Directory.CreateDirectory(dir);
         return dir;
     }
+
+    [GeneratedRegex(@"^(http[s]?\:\/\/)?(?<domain>[a-zA-Z\.]+)\/.+")]
+    private static partial Regex DomainExtractionRegex();
 }
