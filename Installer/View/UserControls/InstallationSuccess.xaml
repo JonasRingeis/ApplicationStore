@@ -24,8 +24,8 @@
             <Image Source="../../Assets/success.png" Width="300" HorizontalAlignment="Left"/>
         </StackPanel>
         <DockPanel Grid.Row="1" HorizontalAlignment="Right">
-            <ui:Button Appearance="Primary" Content="Install More" Margin="0, 0, 4, 0"/>
-            <ui:Button Content="Close"/>
+            <ui:Button Click="Close_Click" Content="Close"/>
+            <ui:Button Click="InstallMore_Click" Appearance="Primary" Content="Install More" Margin="0, 0, 4, 0"/>
         </DockPanel>
     </Grid>
 </UserControl>
