@@ -5,19 +5,19 @@ namespace Installer.ViewModel.Installation;
 
 public class ChecksumVerifier
 {
-    private Dictionary<string, IChecksumAlgorithm> _algorithms = new();
-        
+    private Dictionary<string, IHashAlgorithmWrapper> _algorithmWrappers = new();
+    
     public ChecksumVerifier()
     {
-        _algorithms.Add("MD5", new Md5Algorithm());
-        _algorithms.Add("SHA1", new Sha1Algorithm());
-        _algorithms.Add("SHA256", new Sha256Algorithm());
-        _algorithms.Add("SHA512", new Sha512Algorithm());
+        _algorithmWrappers.Add("MD5", new Md5AlgorithmWrapper());
+        _algorithmWrappers.Add("SHA1", new Sha1AlgorithmWrapper());
+        _algorithmWrappers.Add("SHA256", new Sha256AlgorithmWrapper());
+        _algorithmWrappers.Add("SHA512", new Sha512AlgorithmWrapper());
     }
 
     public bool Verify(string filePath, string algorithmName, string checksum)
     {
-        var foundAlgorithm = _algorithms.TryGetValue(algorithmName, out var algorithm);
+        var foundAlgorithm = _algorithmWrappers.TryGetValue(algorithmName, out var algorithm);
         if (!foundAlgorithm || algorithm is null)
         {
             Console.WriteLine($"WARN: Could not find algorithm with name: '{algorithmName}'");
@@ -25,13 +25,14 @@ public class ChecksumVerifier
         }
         
         var bytes = File.ReadAllBytes(filePath);
-        Console.WriteLine("Read all bytes");
         
-        return algorithm.VerifyChecksum(checksum, bytes);
+        var hash = algorithm.HashData(bytes);
+        var newChecksum = Convert.ToHexString(hash);
+        return checksum.Equals(newChecksum, StringComparison.OrdinalIgnoreCase);
     }
     public async Task<bool> VerifyAsync(string filePath, string algorithmName, string checksum)
     {
-        var foundAlgorithm = _algorithms.TryGetValue(algorithmName, out var algorithm);
+        var foundAlgorithm = _algorithmWrappers.TryGetValue(algorithmName, out var algorithm);
         if (!foundAlgorithm || algorithm is null)
         {
             Console.WriteLine($"WARN: Could not find algorithm with name: '{algorithmName}'");
@@ -42,12 +43,9 @@ public class ChecksumVerifier
         
         using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.None, readChunkSize, true))
         {
-            var before = DateTime.Now;
-            var result = await algorithm.VerifyChecksumAsync(checksum, fs);
-            var after = DateTime.Now;
-            TimeSpan ts = after - before;
-            Console.WriteLine("Time to verify: " + ts);
-            return result;
+            var hash = await algorithm.HashDataAsync(fs);
+            var newChecksum = Convert.ToHexString(hash);
+            return checksum.Equals(newChecksum, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
