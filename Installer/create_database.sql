@@ -101,24 +101,31 @@ INSERT INTO
 values
 (
     1,
-    'j39asklj30er9sdjo',
+    '1bf4241bcc1c41a516f6313243153851ddcc49c22cd23fb8d5371a4b06b839235924f77b206a41880f71f47be0636e9ff2c7873f99daba106c7ee311513bb2dc',
     3,
-    'https://firefox.com/download',
-    '128.16.0'
+    'https://ftp.mozilla.org/pub/firefox/releases/137.0/win64/en-US/Firefox%20Setup%20137.0.exe',
+    '137.0.0'
 ),
-(
+( 
     1,
     'fe23jon2g56f3f4sd',
     3,
-    'https://firefox.com/download',
-    '128.16.1'
+    'https://ftp.mozilla.org/pub/firefox/releases/137.0.1/win64/en-US/Firefox%20Setup%20137.0.1.exe',
+    '137.0.1'
 ),
 (
     1,
     '1bf4241bcc1c41a516f6313243153851ddcc49c22cd23fb8d5371a4b06b839235924f77b206a41880f71f47be0636e9ff2c7873f99daba106c7ee311513bb2dc',
     3,
-    'https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=en-US',
-    '128.17.0'
+    'https://ftp.mozilla.org/pub/firefox/releases/137.0.2/win64/en-US/Firefox%20Setup%20137.0.2.exe',
+    '137.0.2'
+),
+(
+    1,
+    'efe09b091a9ed55d4b504235f7f70838c64d633f8e95c10091ccb46239bd951f6d8ee68cf749be701e8e6b15f1aaadee67703e4bb2f1ff220a32fc7229e0c072',
+    3,
+    'https://ftp.mozilla.org/pub/firefox/releases/138.0/win64/en-US/Firefox%20Setup%20138.0.exe',
+    '138.0.0'
 ),
 (
     2,
