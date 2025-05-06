@@ -1,17 +1,16 @@
 using System.IO;
-using System.Net;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Installer.Gateway;
 using Installer.Model;
-using Installer.View;
 using Installer.ViewModel.Installation;
 
 namespace Installer.ViewModel;
 
-public partial class InstallationViewModel : ObservableObject
+public partial class InstallationViewModel(
+    IApplicationModel applicationGateway,
+    Downloader downloader,
+    ChecksumVerifier checksumVerifier) : ObservableObject
 {
     [ObservableProperty]
     private Visibility? _downloadVisibility, _checksumVisibility, _installationVisibility = Visibility.Collapsed;
@@ -26,26 +25,13 @@ public partial class InstallationViewModel : ObservableObject
     
     [ObservableProperty] private string? _result;
     
-    private readonly string _appDir;
-    
-    private readonly IApplicationModel _applicationModel;
-    private readonly Downloader _downloader;
-    private readonly ChecksumVerifier _checksumVerifier;
+    private readonly string _appDir = GetApplicationDir();
 
-    public InstallationViewModel()
+    public async Task PerformInstallation()
     {
-        _applicationModel = new ApplicationGateway();
-        _downloader = new Downloader();
-        _checksumVerifier = new ChecksumVerifier();
-        _appDir = GetApplicationDir();
-
-        _ = PerformInstallation();
-    }
-
-    private async Task PerformInstallation()
-    {
+        Reset();
         var versionId = MainWindowViewModel.Instance.ApplicationVersion.ApplicationVersionId;
-        InstallationData = await _applicationModel.GetInstallationData(versionId);
+        InstallationData = await applicationGateway.GetInstallationData(versionId);
         DownloadDomain = DomainExtractionRegex().Match(InstallationData.DownloadUrl).Groups["domain"].Value;
 
         var fileName = $"{MainWindowViewModel.Instance.SelectedApplication.ApplicationId}-{MainWindowViewModel.Instance.ApplicationVersion.VersionName}.raw";
@@ -62,6 +48,17 @@ public partial class InstallationViewModel : ObservableObject
         ShowSuccess();
     }
 
+    private void Reset()
+    {
+        DownloadVisibility  = Visibility.Collapsed;
+        ChecksumVisibility  = Visibility.Collapsed;
+        InstallationVisibility = Visibility.Collapsed;
+        CancelButtonVisibility = Visibility.Visible;
+        
+        DownloadProgress = 0;
+        Result = string.Empty;
+    }
+
     private async Task Download(string installationDir)
     {
         DownloadVisibility = Visibility.Visible;
@@ -71,7 +68,7 @@ public partial class InstallationViewModel : ObservableObject
         var progress = new Progress<float>(p => DownloadProgress = p * 100f);
         
         Console.WriteLine($"Saving to file: {installationDir}");
-        await _downloader.DownloadPackages(InstallationData!.DownloadUrl, installationDir, progress);
+        await downloader.DownloadPackages(InstallationData!.DownloadUrl, installationDir, progress);
     }
 
     private async Task<bool> VerifyChecksum(string installationDir)
@@ -81,7 +78,7 @@ public partial class InstallationViewModel : ObservableObject
         
         var algorithm = InstallationData!.ChecksumAlgorithm;
         var checksum = InstallationData!.ChecksumHash;
-        return await _checksumVerifier.VerifyAsync(installationDir, algorithm, checksum);
+        return await checksumVerifier.VerifyAsync(installationDir, algorithm, checksum);
     }
     
     private async Task MockInstallation()

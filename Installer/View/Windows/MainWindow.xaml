@@ -40,6 +40,8 @@
             </ui:TitleBar>
         </DockPanel>
         
+        <ContentPresenter x:Name="RootContentDialogPresenter" Grid.Row="0" />
+        
         <ScrollViewer Grid.Row="1" Margin="16, 8, 16, 16"
                       HorizontalScrollBarVisibility="Hidden"
                       VerticalScrollBarVisibility="Hidden"

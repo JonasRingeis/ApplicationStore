@@ -5,9 +5,13 @@ namespace Installer.View.Pages;
 
 public partial class SelectVersion : UserControl
 {
+    private SelectVersionViewModel _viewModel;
     public SelectVersion()
     {
         InitializeComponent();
-        DataContext = new SelectVersionViewModel();
+        _viewModel = App.GetRequiredService<SelectVersionViewModel>();
+        DataContext = _viewModel;
+
+        _ = _viewModel.GetApplicationVersions();
     }
 }

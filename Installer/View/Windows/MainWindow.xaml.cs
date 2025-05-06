@@ -1,5 +1,6 @@
 ﻿using System.Windows.Media;
 using Installer.ViewModel;
+using Wpf.Ui;
 using Wpf.Ui.Appearance;
 
 namespace Installer.View.Windows;
@@ -12,8 +13,11 @@ public partial class MainWindow
     public MainWindow()
     {
         InitializeComponent();
-        DataContext = new MainWindowViewModel();
+        DataContext = App.GetRequiredService<MainWindowViewModel>();
         ApplicationThemeManager.Apply(this);
+        
+        var contentDialogService = App.GetRequiredService<IContentDialogService>();
+        contentDialogService.SetDialogHost(RootContentDialogPresenter);
         
         OverwriteTheme();
     }

@@ -1,32 +1,23 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Installer.Gateway;
 using Installer.Model;
 using ListView = Wpf.Ui.Controls.ListView;
 
 namespace Installer.ViewModel;
 
-public partial class SelectApplicationViewModel : ObservableObject
+public partial class SelectApplicationViewModel(IApplicationModel applicationModel) : ObservableObject
 {
     [ObservableProperty]
     private ObservableCollection<Application> _applications = [];
 
     [ObservableProperty] private bool _selectButtonEnabled;
-    [ObservableProperty] private Application _selectedApplication;
-    
-    private readonly IApplicationModel _applicationModel;
-    
-    public SelectApplicationViewModel()
+    [ObservableProperty] private Application? _selectedApplication;
+
+    public async Task GetAllApplications()
     {
         SelectButtonEnabled = false;
-        _applicationModel = new ApplicationGateway();
-        _ = GetAllApplications();
-    }
-
-    private async Task GetAllApplications()
-    {
-        Applications = new ObservableCollection<Application>(await _applicationModel.GetAllApplications());
+        Applications = new ObservableCollection<Application>(await applicationModel.GetAllApplications());
     }
     
     public void ApplicationClick(object sender, bool isDoubleClick)
@@ -44,7 +35,7 @@ public partial class SelectApplicationViewModel : ObservableObject
     [RelayCommand]
     private void SelectApp()
     {
-        MainWindowViewModel.Instance.SelectedApplication = SelectedApplication;
+        MainWindowViewModel.Instance.SelectedApplication = SelectedApplication!;
         MainWindowViewModel.Instance.Navigate("SelectVersion");
     }
 }

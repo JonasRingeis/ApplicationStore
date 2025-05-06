@@ -1,4 +1,4 @@
-<UserControl x:Class="Installer.View.Installation"
+<UserControl x:Class="Installer.View.Pages.Installation"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -47,7 +47,7 @@
                 Content="Cancel"
                 ToolTip="Cancel installation"
                 Visibility="{Binding CancelButtonVisibility}"
-                Click="Button_Click"/>
+                Click="Cancel_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>
