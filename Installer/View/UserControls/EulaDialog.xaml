@@ -6,68 +6,65 @@
              xmlns:local="clr-namespace:Installer.View.UserControls"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid ShowGridLines="True">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        
-        <StackPanel Grid.Row="0">
-            <ui:TextBlock FontTypography="Title">
-                End User License Agreement (EULA)
-            </ui:TextBlock>
-            <ui:TextBlock TextWrapping="WrapWithOverflow">
-                <Run FontWeight="Bold" Text="1. Acceptance of Terms"/>
-                <LineBreak />
-                <Run Text="By installing and using this software, you agree to comply with and be bound by the terms and conditions of this End User License Agreement (&quot;EULA&quot;). If you do not agree to these terms, do not install or use the software."/>
-                <LineBreak />
-                <Run FontWeight="Bold" Text="2. License Grant"/>
-                <LineBreak />
-                <Run Text="The software is licensed, not sold. We grant you a non-exclusive, non-transferable license to use the software in accordance with the terms of this EULA."/>
-                <LineBreak />
-                <Run FontWeight="Bold" Text="3. Restrictions"/>
-                <LineBreak />
-                <Run Text="You may not:"/>
-                <LineBreak />
-                <Run Text="• Modify, reverse engineer, decompile, or disassemble the software."/>
-                <LineBreak />
-                <Run Text="• Rent, lease, lend, sell, redistribute, or sublicense the software."/>
-                <LineBreak />
-                <Run Text="• Use the software for any illegal or unauthorized purpose."/>
-                <LineBreak />
-                <Run FontWeight="Bold" Text="4. Ownership"/>
-                <LineBreak />
-                <Run Text="All rights, title, and interest in and to the software are owned by [Company Name]. This EULA does not grant you any ownership rights to the software."/>
-                <LineBreak />
-                <Run FontWeight="Bold" Text="5. Termination"/>
-                <LineBreak />
-                <Run Text="This EULA is effective until terminated. Your rights under this EULA will terminate automatically without notice if you fail to comply with any term(s) of this EULA."/>
-                <LineBreak />
-                <Run FontWeight="Bold" Text="6. Disclaimer of Warranties"/>
-                <LineBreak />
-                <Run Text="The software is provided &quot;as is&quot; without warranty of any kind. We disclaim all warranties, whether express, implied, or statutory, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose."/>
-                <LineBreak />
-                <Run FontWeight="Bold" Text="7. Limitation of Liability"/>
-                <LineBreak />
-                <Run Text="In no event shall [Your Company Name] be liable for any special, incidental, indirect, or consequential damages whatsoever arising out of or in connection with the use or performance of the software."/>
-                <LineBreak />
-                <Run FontWeight="Bold" Text="8. Governing Law"/>
-                <LineBreak />
-                <Run Text="This EULA shall be governed by and construed in accordance with the laws of Germany."/>
-                <LineBreak />
-                <Run FontWeight="Bold" Text="9. Entire Agreement"/>
-                <LineBreak />
-                <Run Text="This EULA constitutes the entire agreement between you and [Company Name] regarding the software and supersedes all prior or contemporaneous understandings."/>
-                <LineBreak />
-                <Run FontWeight="Bold" Text="10. Contact Information"/>
-                <LineBreak />
-                <Run Text="For questions regarding this EULA, please contact us at contact@company.com."/>
-            </ui:TextBlock>
-        </StackPanel>
-        <StackPanel Grid.Row="1">
-            <ui:TextBlock Text="You need to accept the EULA to install the software." />
-            <CheckBox Content="Accept" />
-        </StackPanel>
+             d:DataContext="{d:DesignInstance local:EulaDialog}"
+             Title="End User License Agreement (EULA)"
+             ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+             ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+             DialogMaxWidth="650"
+             DialogMaxHeight="350"
+             PrimaryButtonText="Accept"
+             d:DesignHeight="375" d:DesignWidth="650">
+    <ui:ContentDialog.Resources>
+        <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:EulaDialog}" />
+    </ui:ContentDialog.Resources>
+    
+    <Grid>
+        <ui:TextBlock TextWrapping="WrapWithOverflow">
+            <Run FontWeight="Bold" Text="1. Acceptance of Terms"/>
+            <LineBreak />
+            <Run Text="By installing and using this software, you agree to comply with and be bound by the terms and conditions of this End User License Agreement (&quot;EULA&quot;). If you do not agree to these terms, do not install or use the software."/>
+            <LineBreak />
+            <Run FontWeight="Bold" Text="2. License Grant"/>
+            <LineBreak />
+            <Run Text="The software is licensed, not sold. We grant you a non-exclusive, non-transferable license to use the software in accordance with the terms of this EULA."/>
+            <LineBreak />
+            <Run FontWeight="Bold" Text="3. Restrictions"/>
+            <LineBreak />
+            <Run Text="You may not:"/>
+            <LineBreak />
+            <Run Text="• Modify, reverse engineer, decompile, or disassemble the software."/>
+            <LineBreak />
+            <Run Text="• Rent, lease, lend, sell, redistribute, or sublicense the software."/>
+            <LineBreak />
+            <Run Text="• Use the software for any illegal or unauthorized purpose."/>
+            <LineBreak />
+            <Run FontWeight="Bold" Text="4. Ownership"/>
+            <LineBreak />
+            <Run Text="All rights, title, and interest in and to the software are owned by [Company Name]. This EULA does not grant you any ownership rights to the software."/>
+            <LineBreak />
+            <Run FontWeight="Bold" Text="5. Termination"/>
+            <LineBreak />
+            <Run Text="This EULA is effective until terminated. Your rights under this EULA will terminate automatically without notice if you fail to comply with any term(s) of this EULA."/>
+            <LineBreak />
+            <Run FontWeight="Bold" Text="6. Disclaimer of Warranties"/>
+            <LineBreak />
+            <Run Text="The software is provided &quot;as is&quot; without warranty of any kind. We disclaim all warranties, whether express, implied, or statutory, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose."/>
+            <LineBreak />
+            <Run FontWeight="Bold" Text="7. Limitation of Liability"/>
+            <LineBreak />
+            <Run Text="In no event shall [Your Company Name] be liable for any special, incidental, indirect, or consequential damages whatsoever arising out of or in connection with the use or performance of the software."/>
+            <LineBreak />
+            <Run FontWeight="Bold" Text="8. Governing Law"/>
+            <LineBreak />
+            <Run Text="This EULA shall be governed by and construed in accordance with the laws of Germany."/>
+            <LineBreak />
+            <Run FontWeight="Bold" Text="9. Entire Agreement"/>
+            <LineBreak />
+            <Run Text="This EULA constitutes the entire agreement between you and [Company Name] regarding the software and supersedes all prior or contemporaneous understandings."/>
+            <LineBreak />
+            <Run FontWeight="Bold" Text="10. Contact Information"/>
+            <LineBreak />
+            <Run Text="For questions regarding this EULA, please contact us at contact@company.com."/>
+        </ui:TextBlock>
     </Grid>
 </ui:ContentDialog>

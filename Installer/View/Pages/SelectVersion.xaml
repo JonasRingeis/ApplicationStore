@@ -35,7 +35,7 @@
                     DisplayMemberPath="VersionName"/>
                 <ui:Button
                     Margin="0, 8, 0, 0"
-                    Command="{Binding InstallCommand}"
+                    Command="{Binding ShowEulaDialogCommand}"
                     HorizontalAlignment="Right" Appearance="Primary"
                     Content="Install" />
             </StackPanel>

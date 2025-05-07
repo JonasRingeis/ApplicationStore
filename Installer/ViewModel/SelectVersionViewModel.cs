@@ -37,6 +37,7 @@ public partial class SelectVersionViewModel(
     private async Task OnShowEulaDialog()
     {
         var dialog = new EulaDialog(dialogService.GetDialogHost());
-        await dialog.ShowAsync();
+        var result = await dialog.ShowAsync();
+        Console.WriteLine(result);
     }
 }
