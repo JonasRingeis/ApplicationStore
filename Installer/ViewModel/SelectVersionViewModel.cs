@@ -5,6 +5,7 @@ using Installer.Gateway;
 using Installer.Model;
 using Installer.View.UserControls;
 using Wpf.Ui;
+using Wpf.Ui.Controls;
 
 namespace Installer.ViewModel;
 
@@ -26,7 +27,6 @@ public partial class SelectVersionViewModel(
         SelectedVersion = ApplicationVersions.First();
     }
     
-    [RelayCommand]
     private void Install()
     {
         MainWindowViewModel.Instance.ApplicationVersion = SelectedVersion;
@@ -38,6 +38,9 @@ public partial class SelectVersionViewModel(
     {
         var dialog = new EulaDialog(dialogService.GetDialogHost());
         var result = await dialog.ShowAsync();
-        Console.WriteLine(result);
+        if (result == ContentDialogResult.Primary)
+        {
+            Install();
+        }
     }
 }
