@@ -54,10 +54,8 @@ public partial class App : Application
     /// <example>
     /// Constructor registering service
     /// <code>
-    /// // ...
-    /// services.AddSingleton&lt;SomeViewModel&gt;
-    /// services.AddSingleton&lt;ISomeModel, SomeGateway&gt;
-    /// // ...
+    /// services.AddSingleton&lt;SomeViewModel&gt;();
+    /// services.AddSingleton&lt;ISomeModel, SomeGateway&gt;();
     /// </code>
     ///
     /// Actual usage
