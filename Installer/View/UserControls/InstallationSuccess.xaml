@@ -21,7 +21,6 @@
                 <ui:TextBlock FontTypography="Title" Text="Installation Succeeded" />
             </StackPanel>
             <ui:TextBlock Text="Software was successfully installed." />
-            <Image Source="../../Assets/success.png" Width="300" HorizontalAlignment="Left"/>
         </StackPanel>
         <DockPanel Grid.Row="1" HorizontalAlignment="Right">
             <ui:Button Click="Close_Click" Content="Close"/>

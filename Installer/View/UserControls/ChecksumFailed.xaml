@@ -30,7 +30,6 @@
                 - The downloaded content was corrupted in transfer
                 
             </ui:TextBlock>
-            <Image Source="../../Assets/sad.png" Width="200" HorizontalAlignment="Left"/>
         </StackPanel>
         <DockPanel Grid.Row="1" HorizontalAlignment="Right">
             <ui:Button Click="Close_Click" Content="Close" Margin="0, 0, 4, 0"/>
