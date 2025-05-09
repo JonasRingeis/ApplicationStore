@@ -8,14 +8,23 @@ It uses the WpfUI Library alongside Dapper to map the database results.
 
 
 ## Local Setup
-To be able to start the application you'll need to have the database running. For that simply execute the following.
-```bash
-docker compose up -d
-```
 
-This will start up a docker container runnning ms sql server.
+1. To be able to start the application you'll need to have the database running. For that simply execute the following.
+   ```bash
+   cd Installer
+   docker compose up -d
+   ```
+    This will start up a docker container running ms sql server in the background.<br> 
+    By default the docker container will **stay running**, even when the **system restarted**. 
+    
+    > To stop it simply run ``docker compose down``
+   
+2. Then the database and tables need to be set up.
 
-To stop it simply execute this.
-```bash
-docker compose down
-```
+   For this you'll need to connect to the database and execute [this sql script](./Installer/create_database.sql).
+
+3. Then when executing the app you'll need to have one env variable set.
+   
+   | name   | value                                                                                                               |
+   |--------|---------------------------------------------------------------------------------------------------------------------|
+   | DB_URI | Server=localhost,1433;Database=<DATABASE_NAME>;User Id=sa;Password=SECURE_PASSWORD_123;TrustServerCertificate=True; |
