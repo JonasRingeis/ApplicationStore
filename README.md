@@ -20,8 +20,9 @@ It uses the WpfUI Library alongside Dapper to map the database results.
     > To stop it simply run ``docker compose down``
    
 2. Then the database and tables need to be set up.
-
-   For this you'll need to connect to the database and execute [this sql script](./Installer/create_database.sql).
+   ```cmd
+   sqlcmd -S localhost -P SECURE_PASSWORD_123 -U sa -C -i create_database.sql
+   ```
 
 3. Then when executing the app you'll need to have one env variable set.
    

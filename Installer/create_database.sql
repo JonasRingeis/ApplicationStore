@@ -1,7 +1,5 @@
-BEGIN --#region create database
-CREATE DATABASE app_store;
-END
---#endregion
+CREATE DATABASE app_store;  
+GO
 
 BEGIN --#region create tables
 
