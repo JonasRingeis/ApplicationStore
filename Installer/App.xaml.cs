@@ -15,7 +15,7 @@ public partial class App : Application
 {
     public new static App Current => (App)Application.Current; 
     
-    public IServiceProvider Services;
+    public readonly IServiceProvider Services;
     public App()
     {
         Services = ConfigureServices();
