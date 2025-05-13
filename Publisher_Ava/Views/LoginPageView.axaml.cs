@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace Publisher_Ava.Views;
 
-public partial class LoginPage : UserControl
+public partial class LoginPageView : UserControl
 {
-    public LoginPage()
+    public LoginPageView()
     {
         InitializeComponent();
     }

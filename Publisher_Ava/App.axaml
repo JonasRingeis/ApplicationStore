@@ -4,7 +4,15 @@
              xmlns:local="using:Publisher_Ava"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-
+    <Application.Styles>
+        <StyleInclude Source="Styles/DefaultStyles.axaml"/>
+    </Application.Styles>
+    <Application.Resources>
+        <SolidColorBrush x:Key="PrimaryBackground">#673385</SolidColorBrush>
+        <SolidColorBrush x:Key="PrimaryHoverBackground">#5B1D80</SolidColorBrush>
+        <SolidColorBrush x:Key="PrimaryActiveBackground">#4F0D76</SolidColorBrush>
+    </Application.Resources>
+             
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>

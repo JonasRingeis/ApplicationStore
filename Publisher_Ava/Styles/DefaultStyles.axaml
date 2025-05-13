@@ -1,0 +1,19 @@
+<Styles xmlns="https://github.com/avaloniaui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <StackPanel>
+            <Button Content="Submit" Classes="Primary"/>
+        </StackPanel>
+    </Design.PreviewWith>
+    <Style Selector="Button.Primary">
+        <Style Selector="^ /template/ContentPresenter">
+            <Setter Property="Background" Value="{DynamicResource PrimaryBackground}" />
+        </Style>
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="{DynamicResource PrimaryHoverBackground}" />
+        </Style>
+        <Style Selector="^:pressed">
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryActiveBackground}" />
+        </Style>
+    </Style>
+</Styles>
