@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "Installer\Installer.csproj", "{64BDD3FD-AC90-4E64-8A02-11D36CC81BE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publisher-Ava", "Publisher-Ava\Publisher-Ava.csproj", "{B086D2A4-E8D4-4FA7-AA36-BF326C7DC227}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publisher_Ava", "Publisher_Ava\Publisher_Ava.csproj", "{B086D2A4-E8D4-4FA7-AA36-BF326C7DC227}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
