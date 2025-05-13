@@ -23,7 +23,7 @@
             <ui:TextBlock Text="Software was successfully installed." />
         </StackPanel>
         <DockPanel Grid.Row="1" HorizontalAlignment="Right">
-            <ui:Button Click="Close_Click" Content="Close"/>
+            <ui:Button Click="Close_Click" Content="Close" Margin="0, 0, 4, 0"/>
             <ui:Button Click="InstallMore_Click" Appearance="Primary" Content="Install More" Margin="0, 0, 4, 0"/>
         </DockPanel>
     </Grid>
