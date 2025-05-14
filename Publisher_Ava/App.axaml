@@ -9,7 +9,7 @@
     </Application.Styles>
     <Application.Resources>
         <SolidColorBrush x:Key="PrimaryBackground">#673385</SolidColorBrush>
-        <SolidColorBrush x:Key="PrimaryHoverBackground">#5B1D80</SolidColorBrush>
+        <SolidColorBrush x:Key="PrimaryHoverBackground">#7d36a7</SolidColorBrush>
         <SolidColorBrush x:Key="PrimaryActiveBackground">#4F0D76</SolidColorBrush>
     </Application.Resources>
              
